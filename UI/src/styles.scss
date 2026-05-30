@@ -1,0 +1,224 @@
+// ============================================
+// WasteFree - Global Styles
+// ============================================
+
+// Import Design System
+@import 'styles/variables';
+@import 'styles/mixins';
+@import 'styles/forms';
+@import 'styles/cards';
+@import 'styles/utilities';
+
+// ============================================
+// Reset & Base Styles
+// ============================================
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $gray-900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: $white;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// ============================================
+// CSS Variables (for dynamic values)
+// ============================================
+
+:root {
+  --topbar-height: 72px;
+  --primary-green: #{$primary};
+  --primary-green-dark: #{$primary-dark};
+  --topbar-contrast: rgba(255, 255, 255, 0.08);
+}
+
+// ============================================
+// Toast Notifications
+// ============================================
+
+.toast-success,
+.toast-error,
+.toast-info {
+  font-weight: $font-weight-bold !important;
+  border-radius: $radius-md !important;
+}
+
+.toast-container,
+.ngx-toastr {
+  z-index: $z-tooltip !important;
+}
+
+// ============================================
+// Background Styles
+// ============================================
+
+body.auth-bg,
+body.portal-bg {
+  background-image: url('/assets/images/auth_background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  background-color: #f0fff5;
+}
+
+.gradient-groups {
+  background: linear-gradient(135deg, $primary, $primary-dark);
+}
+
+.portal-wallet-bg {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect fill='%23ffffff' width='40' height='40'/><g fill='%231f8b56' fill-opacity='0.02'><circle cx='10' cy='10' r='2'/><circle cx='30' cy='30' r='2'/></g></svg>"),
+    radial-gradient(circle at 12% 18%, rgba(43, 108, 79, 0.06), transparent 18%),
+    radial-gradient(circle at 88% 82%, rgba(43, 108, 79, 0.04), transparent 16%),
+    linear-gradient(180deg, #fbfff9, #f7fff8);
+  background-attachment: fixed, fixed, fixed, fixed;
+  background-size: 240px 240px, 60% 60%, 60% 60%, auto;
+  min-height: 100vh;
+  animation: wallet-bg-move 18s linear infinite;
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes wallet-bg-move {
+  from {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  to {
+    background-position: 100% 100%, 10% 10%, 10% 10%, 0% 0%;
+  }
+}
+
+// ============================================
+// Layout Components
+// ============================================
+
+.topbar-placeholder {
+  height: var(--topbar-height);
+}
+
+// ============================================
+// Navigation
+// ============================================
+
+.navbar {
+  .navbar-nav {
+    flex-wrap: nowrap;
+    
+    @include mobile {
+      flex-wrap: wrap;
+    }
+  }
+  
+  .nav-item .btn {
+    white-space: nowrap;
+    min-width: 88px;
+    
+    @include mobile {
+      min-width: 0;
+    }
+  }
+}
+
+// ============================================
+// Language Switcher
+// ============================================
+
+.global-lang-switcher {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: $z-popover;
+  
+  app-language-switcher {
+    display: inline-block;
+  }
+  
+  @include tablet {
+    top: 10px;
+    right: 8px;
+    
+    .btn {
+      padding: 4px 8px;
+      font-size: $font-size-sm;
+    }
+  }
+  
+  @include mobile {
+    .btn {
+      padding: 4px;
+      min-width: 36px;
+      
+      img + span {
+        display: none;
+      }
+    }
+  }
+  
+  @media (min-width: $desktop-lg) and (max-width: 1600px) {
+    top: 18px;
+  }
+}
+
+// ============================================
+// Utility Classes
+// ============================================
+
+.text-truncate {
+  @include truncate;
+}
+
+.sr-only {
+  @include sr-only;
+}
+
+// Spacing utilities
+@each $size, $value in (
+  'xs': $spacing-xs,
+  'sm': $spacing-sm,
+  'md': $spacing-md,
+  'lg': $spacing-lg,
+  'xl': $spacing-xl,
+  'xxl': $spacing-xxl
+) {
+  .m-#{$size} { margin: $value; }
+  .mt-#{$size} { margin-top: $value; }
+  .mb-#{$size} { margin-bottom: $value; }
+  .ml-#{$size} { margin-left: $value; }
+  .mr-#{$size} { margin-right: $value; }
+  .mx-#{$size} { margin-left: $value; margin-right: $value; }
+  .my-#{$size} { margin-top: $value; margin-bottom: $value; }
+  
+  .p-#{$size} { padding: $value; }
+  .pt-#{$size} { padding-top: $value; }
+  .pb-#{$size} { padding-bottom: $value; }
+  .pl-#{$size} { padding-left: $value; }
+  .pr-#{$size} { padding-right: $value; }
+  .px-#{$size} { padding-left: $value; padding-right: $value; }
+  .py-#{$size} { padding-top: $value; padding-bottom: $value; }
+}
+
+// ============================================
+// Scrollbar Styling
+// ============================================
+
+* {
+  @include scrollbar;
+}
+
+// Made with Bob

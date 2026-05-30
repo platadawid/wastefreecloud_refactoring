@@ -1,0 +1,55 @@
+<div class="activation-shell">
+  <div class="activation-box">
+    <!-- Pending State -->
+    <ng-container *ngIf="status === 'pending'">
+      <div class="activation-icon activation-icon--pending">
+        <span class="spinner-border" role="status" aria-hidden="true"></span>
+      </div>
+      <h2>{{ 'auth.account.activating' | translate }}</h2>
+      <p>{{ 'auth.account.activated.wait' | translate }}</p>
+    </ng-container>
+
+    <!-- Success State -->
+    <ng-container *ngIf="status === 'success'">
+      <div class="activation-icon activation-icon--success">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <h2>{{ 'auth.account.activated.title' | translate }}</h2>
+      <p>{{ 'auth.account.activated.success' | translate }}</p>
+    </ng-container>
+
+    <!-- Error State -->
+    <ng-container *ngIf="status === 'error'">
+      <div class="activation-icon activation-icon--error">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+      </div>
+      <h2>{{ 'auth.account.activated.errorTitle' | translate }}</h2>
+      <p>{{ message || ('auth.account.activated.error' | translate) }}</p>
+    </ng-container>
+
+    <!-- Actions -->
+    <div class="actions" *ngIf="status !== 'pending'">
+      <button
+        *ngIf="status === 'success'"
+        class="btn btn--primary btn--grow"
+        (click)="gotoLogin()"
+        type="button">
+        {{ 'auth.backToLogin' | translate }}
+      </button>
+      <button
+        *ngIf="status === 'error'"
+        class="btn btn--secondary btn--grow"
+        (click)="gotoHome()"
+        type="button">
+        {{ 'nav.goApp' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

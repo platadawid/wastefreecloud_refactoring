@@ -1,0 +1,202 @@
+﻿// ============================================
+// Activation Component Styles
+// ============================================
+
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.activation-shell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: $spacing-md;
+
+  @include mobile {
+    min-height: 60vh;
+    padding: $spacing-sm;
+  }
+}
+
+.activation-box {
+  max-width: 520px;
+  width: 100%;
+  padding: $spacing-xl;
+  border-radius: $radius-lg;
+  background: $white;
+  text-align: center;
+  box-shadow: $shadow-lg;
+
+  @include mobile {
+    padding: $spacing-lg;
+    border-radius: $radius-md;
+  }
+
+  h2 {
+    margin-bottom: $spacing-md;
+    color: $text-primary;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-base;
+    line-height: 1.6;
+
+    @include mobile {
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+// Activation Icon
+.activation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto $spacing-lg;
+  border-radius: 50%;
+  
+  @include mobile {
+    width: 80px;
+    height: 80px;
+  }
+
+  &--pending {
+    background: rgba($primary, 0.1);
+    color: $primary;
+
+    .spinner-border {
+      width: 48px;
+      height: 48px;
+      border-width: 4px;
+      color: $primary;
+
+      @include mobile {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+      }
+    }
+  }
+
+  &--success {
+    background: rgba($success, 0.1);
+    color: $success;
+    animation: scaleIn 0.5s ease-out;
+
+    svg {
+      animation: checkmark 0.6s ease-out 0.2s both;
+    }
+  }
+
+  &--error {
+    background: rgba($danger, 0.1);
+    color: $danger;
+    animation: shake 0.5s ease-out;
+  }
+}
+
+// Actions
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  margin-top: $spacing-xl;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+// Button Styles
+.btn {
+  @include touch-button;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-base;
+  transition: all $transition-normal;
+  min-width: 160px;
+  border: none;
+  cursor: pointer;
+
+  @include mobile {
+    width: 100%;
+    min-width: auto;
+  }
+
+  &--primary {
+    @include button-primary;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: $shadow-xl;
+    }
+  }
+
+  &--secondary {
+    @include button-secondary;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &--grow {
+    flex: 1;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Animations
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+  100% {
+    stroke-dasharray: 100 100;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+

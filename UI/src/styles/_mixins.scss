@@ -1,0 +1,509 @@
+// ============================================
+// WasteFree Design System - Mixins
+// ============================================
+
+@import 'variables';
+
+// ============================================
+// Responsive Breakpoints
+// ============================================
+
+// Mobile first approach
+@mixin mobile {
+  @media (max-width: #{$mobile - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-lg {
+  @media (min-width: $desktop-lg) {
+    @content;
+  }
+}
+
+// Custom breakpoint
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// ============================================
+// Flexbox Utilities
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// ============================================
+// Typography
+// ============================================
+
+@mixin heading-1 {
+  font-family: $font-family-heading;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  
+  @include mobile {
+    font-size: $font-size-3xl;
+  }
+}
+
+@mixin heading-2 {
+  font-family: $font-family-heading;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  
+  @include mobile {
+    font-size: $font-size-2xl;
+  }
+}
+
+@mixin heading-3 {
+  font-family: $font-family-heading;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  
+  @include mobile {
+    font-size: $font-size-xl;
+  }
+}
+
+@mixin body-text {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+}
+
+@mixin small-text {
+  font-family: $font-family-base;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+}
+
+// ============================================
+// Cards & Containers
+// ============================================
+
+@mixin card {
+  background: $white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+  
+  @include mobile {
+    padding: $spacing-md;
+    border-radius: $radius-md;
+  }
+}
+
+@mixin card-hover {
+  transition: all $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================
+// Buttons
+// ============================================
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $radius-md;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  @include mobile {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $primary;
+  color: $white;
+  
+  &:hover:not(:disabled) {
+    background: $primary-dark;
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: $gray-200;
+  color: $gray-800;
+  
+  &:hover:not(:disabled) {
+    background: $gray-300;
+  }
+}
+
+@mixin button-outline {
+  @include button-base;
+  background: transparent;
+  border: 2px solid $primary;
+  color: $primary;
+  
+  &:hover:not(:disabled) {
+    background: $primary;
+    color: $white;
+  }
+}
+
+// ============================================
+// Forms
+// ============================================
+
+@mixin input-base {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: 2px solid $gray-300;
+  border-radius: $radius-md;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  transition: all $transition-base;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+  
+  &::placeholder {
+    color: $gray-400;
+  }
+  
+  &:disabled {
+    background: $gray-100;
+    cursor: not-allowed;
+  }
+  
+  @include mobile {
+    padding: $spacing-md;
+    font-size: $font-size-lg;
+  }
+}
+
+@mixin input-error {
+  border-color: $error;
+  
+  &:focus {
+    border-color: $error;
+    box-shadow: 0 0 0 3px rgba($error, 0.1);
+  }
+}
+
+// ============================================
+// Utilities
+// ============================================
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $gray-100;
+    border-radius: $radius-sm;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $gray-400;
+    border-radius: $radius-sm;
+    
+    &:hover {
+      background: $gray-500;
+    }
+  }
+}
+
+@mixin loading-spinner {
+  border: 3px solid $gray-200;
+  border-top-color: $primary;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================
+// Accessibility
+// ============================================
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+// ============================================
+// Touch-Friendly Form Controls
+// ============================================
+
+// Touch-friendly input fields (min 48px height for mobile)
+@mixin touch-input {
+  min-height: 48px;
+  padding: $spacing-sm $spacing-md;
+  font-size: 16px; // Prevents zoom on iOS
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  background-color: $white;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+
+  &:disabled {
+    background-color: $gray-100;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &.error,
+  &.ng-invalid.ng-touched {
+    border-color: $danger;
+  }
+
+  @include mobile {
+    font-size: 16px; // Prevent zoom on mobile
+  }
+}
+
+// Touch-friendly select dropdown
+@mixin touch-select {
+  @include touch-input;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-sm center;
+  padding-right: $spacing-xl;
+}
+
+// Touch-friendly textarea
+@mixin touch-textarea {
+  @include touch-input;
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+// Touch-friendly checkbox/radio
+@mixin touch-checkbox {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  accent-color: $primary;
+
+  @include mobile {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+// Form group spacing
+@mixin form-group {
+  margin-bottom: $spacing-lg;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+    color: $text-primary;
+    font-size: $font-size-sm;
+  }
+
+  .error-message {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $danger;
+    font-size: $font-size-xs;
+  }
+
+  .hint-text {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $text-secondary;
+    font-size: $font-size-xs;
+  }
+}
+
+// Touch-friendly button
+@mixin touch-button {
+  min-height: 48px;
+  padding: $spacing-sm $spacing-lg;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  @include mobile {
+    min-height: 48px;
+    padding: $spacing-md $spacing-lg;
+  }
+}
+
+// Primary button variant
+@mixin button-primary {
+  @include touch-button;
+  background-color: $primary;
+  color: $white;
+
+  &:hover:not(:disabled) {
+    background-color: darken($primary, 8%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+// Secondary button variant
+@mixin button-secondary {
+  @include touch-button;
+  background-color: $white;
+  color: $primary;
+  border: 2px solid $primary;
+
+  &:hover:not(:disabled) {
+    background-color: rgba($primary, 0.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+// Danger button variant
+@mixin button-danger {
+  @include touch-button;
+  background-color: $danger;
+  color: $white;
+
+  &:hover:not(:disabled) {
+    background-color: darken($danger, 8%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $danger;
+    outline-offset: 2px;
+  }
+}
+
+
+// Made with Bob

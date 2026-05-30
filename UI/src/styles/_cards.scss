@@ -1,0 +1,532 @@
+// ============================================
+// WasteFree Design System - Cards & Lists
+// ============================================
+
+@import 'variables';
+@import 'mixins';
+
+// ============================================
+// Card Base Styles
+// ============================================
+
+.card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: all $transition-normal;
+
+  @include mobile {
+    border-radius: $radius-md;
+  }
+}
+
+// Card hover effect
+.card-hover {
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+
+  @include mobile {
+    // Disable hover effects on mobile
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Card clickable
+.card-clickable {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ============================================
+// Card Header
+// ============================================
+
+.card-header {
+  padding: $spacing-lg $spacing-xl;
+  background: linear-gradient(135deg, $primary, $primary-dark);
+  color: $white;
+  border-bottom: none;
+
+  @include mobile {
+    padding: $spacing-md $spacing-lg;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: $white;
+  }
+
+  h5 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
+  }
+
+  small {
+    opacity: 0.9;
+    font-size: $font-size-sm;
+  }
+}
+
+// Card header variants
+.card-header-light {
+  background: $gray-50;
+  color: $text-primary;
+  border-bottom: 1px solid $border-color;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $text-primary;
+  }
+}
+
+.card-header-white {
+  background: $white;
+  color: $text-primary;
+  border-bottom: 1px solid $border-color;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $text-primary;
+  }
+}
+
+// ============================================
+// Card Body
+// ============================================
+
+.card-body {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+
+  &:last-child {
+    padding-bottom: $spacing-xl;
+
+    @include mobile {
+      padding-bottom: $spacing-lg;
+    }
+  }
+}
+
+.card-body-compact {
+  padding: $spacing-lg;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+// ============================================
+// Card Footer
+// ============================================
+
+.card-footer {
+  padding: $spacing-lg $spacing-xl;
+  background: $gray-50;
+  border-top: 1px solid $border-color;
+
+  @include mobile {
+    padding: $spacing-md $spacing-lg;
+  }
+}
+
+// ============================================
+// Fancy Cards (with icons and gradients)
+// ============================================
+
+.fancy-card {
+  border-radius: $radius-xl;
+  overflow: hidden;
+  border: none;
+  box-shadow: $shadow-md;
+
+  @include mobile {
+    border-radius: $radius-lg;
+  }
+
+  .card-header {
+    padding: $spacing-lg $spacing-xl;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+
+    @include mobile {
+      padding: $spacing-md $spacing-lg;
+    }
+  }
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
+}
+
+.card-heading__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $shadow-sm;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 40px;
+    height: 40px;
+  }
+
+  img, svg {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+
+    @include mobile {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// ============================================
+// Card Grid Layout
+// ============================================
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-lg;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+// ============================================
+// List Styles
+// ============================================
+
+.list-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.list-group-item {
+  padding: $spacing-md $spacing-lg;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  @include mobile {
+    padding: $spacing-sm $spacing-md;
+    // Increase touch target
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    background: $gray-50;
+    box-shadow: $shadow-sm;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.list-group-item-action {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: $gray-50;
+  }
+
+  &:active {
+    background: $gray-100;
+  }
+}
+
+// List item with avatar
+.list-item-avatar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-md;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    @include mobile {
+      width: 40px;
+      height: 40px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .list-item-content {
+    flex: 1;
+    min-width: 0; // Allow text truncation
+  }
+
+  .list-item-title {
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    margin: 0 0 $spacing-2xs 0;
+    @include truncate;
+  }
+
+  .list-item-subtitle {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin: 0;
+    @include truncate;
+  }
+
+  .list-item-action {
+    flex-shrink: 0;
+    margin-left: $spacing-sm;
+  }
+}
+
+// ============================================
+// Empty State
+// ============================================
+
+.empty-state {
+  text-align: center;
+  padding: $spacing-xxl $spacing-lg;
+  color: $text-secondary;
+
+  @include mobile {
+    padding: $spacing-xl $spacing-md;
+  }
+
+  &__icon {
+    font-size: 4rem;
+    color: $gray-300;
+    margin-bottom: $spacing-lg;
+
+    @include mobile {
+      font-size: 3rem;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+
+    @include mobile {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin-bottom: $spacing-lg;
+
+    @include mobile {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__action {
+    margin-top: $spacing-lg;
+  }
+}
+
+// ============================================
+// Loading State
+// ============================================
+
+.card-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid $gray-200;
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+// ============================================
+// Skeleton Loading
+// ============================================
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $gray-200 0%,
+    $gray-100 50%,
+    $gray-200 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: $radius-sm;
+
+  &-text {
+    height: 1em;
+    margin-bottom: $spacing-xs;
+  }
+
+  &-title {
+    height: 1.5em;
+    width: 60%;
+    margin-bottom: $spacing-sm;
+  }
+
+  &-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-md;
+  }
+
+  &-card {
+    height: 200px;
+    border-radius: $radius-lg;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// ============================================
+// Status Badges
+// ============================================
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-2xs $spacing-sm;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &-success {
+    background: rgba($success, 0.1);
+    color: $success-dark;
+  }
+
+  &-warning {
+    background: rgba($warning, 0.1);
+    color: $warning-dark;
+  }
+
+  &-danger {
+    background: rgba($danger, 0.1);
+    color: $danger-dark;
+  }
+
+  &-info {
+    background: rgba($info, 0.1);
+    color: $info-dark;
+  }
+
+  &-primary {
+    background: rgba($primary, 0.1);
+    color: $primary-dark;
+  }
+}
+
+// Made with Bob

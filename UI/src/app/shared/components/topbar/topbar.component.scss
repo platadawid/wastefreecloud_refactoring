@@ -1,0 +1,449 @@
+﻿@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+// ============================================
+// Topbar Component
+// ============================================
+
+.topbar {
+  width: 100%;
+  box-shadow: 0 2px $spacing-xs rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  min-height: 56px;
+  
+  // Topbar visible on all devices
+  // Bottom nav provides additional mobile navigation
+}
+
+.topbar-inner {
+  @include flex-between;
+  padding: $spacing-xs $spacing-sm;
+  color: $white;
+  gap: $spacing-xs;
+  
+  @include tablet {
+    padding: $spacing-xs $spacing-lg;
+    gap: $spacing-md;
+  }
+}
+
+.topbar-content {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  
+  @include tablet {
+    gap: $spacing-sm;
+  }
+}
+
+// ============================================
+// Brand
+// ============================================
+
+.brand {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+  white-space: nowrap;
+  
+  @include mobile {
+    font-size: $font-size-sm;
+  }
+}
+
+// ============================================
+// User Info & Avatar
+// ============================================
+
+.user-info {
+  @include flex-center;
+  gap: $spacing-sm;
+}
+
+.user-pill {
+  @include flex-center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  color: $white;
+  
+  @include mobile {
+    padding: $spacing-2xs $spacing-xs;
+    gap: $spacing-2xs;
+  }
+}
+
+.user-link {
+  @include flex-center;
+  gap: $spacing-xs;
+  color: $white;
+  text-decoration: none;
+  transition: $transition-base;
+  
+  &:hover {
+    opacity: 0.9;
+    color: $white;
+  }
+  
+  @include mobile {
+    gap: 0;
+  }
+}
+
+.user-avatar-img,
+.user-avatar-fallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: $shadow-sm;
+  
+  @include mobile {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.user-avatar-img {
+  object-fit: cover;
+}
+
+.user-avatar-fallback {
+  @include flex-center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+  background: rgba(255, 255, 255, 0.18);
+  
+  @include mobile {
+    font-size: $font-size-sm;
+  }
+}
+
+.user-text {
+  @include flex-column;
+  line-height: 1;
+  text-align: left;
+  
+  // Show on desktop, hide on mobile
+  display: none;
+  
+  @include tablet {
+    display: flex;
+  }
+}
+
+.name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $white;
+  
+  a {
+    color: $white;
+    text-decoration: underline;
+    
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.role {
+  font-size: $font-size-xs;
+  opacity: 0.9;
+  margin-top: 2px;
+  color: $white;
+}
+
+.logout-btn {
+  @include flex-center;
+  gap: $spacing-2xs;
+  padding: $spacing-2xs $spacing-xs;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  color: $white;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: $transition-base;
+  margin-left: $spacing-xs;
+  padding-left: $spacing-xs;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $white;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  
+  span {
+    white-space: nowrap;
+    font-weight: $font-weight-medium;
+  }
+  
+  @include mobile {
+    padding: $spacing-2xs;
+    margin-left: $spacing-2xs;
+    padding-left: $spacing-2xs;
+    
+    span {
+      display: none;
+    }
+  }
+}
+
+// ============================================
+// Wallet
+// ============================================
+
+.wallet-slot {
+  @include flex-center;
+  margin-right: $spacing-sm;
+}
+
+.wallet-pill {
+  @include flex-center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  color: $white;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+  transition: $transition-base;
+  
+  @include mobile {
+    padding: $spacing-2xs $spacing-xs;
+    gap: $spacing-2xs;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: $white;
+  }
+}
+
+.wallet-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: invert(1) brightness(1.2);
+}
+
+.wallet-value {
+  @include flex-column;
+  line-height: 1;
+  text-align: left;
+}
+
+.amount {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.currency {
+  font-size: $font-size-xs;
+  opacity: 0.9;
+  margin-top: 1px;
+  
+  @media (max-width: 520px) {
+    display: none;
+  }
+}
+
+// ============================================
+// Inbox
+// ============================================
+
+.inbox-slot {
+  @include flex-center;
+  margin-right: $spacing-sm;
+}
+
+.inbox-pill {
+  @include flex-center;
+  position: relative;
+  width: 40px;
+  height: 36px;
+  padding: $spacing-xs;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  color: $white;
+  border: none;
+  cursor: pointer;
+  transition: $transition-base;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  &.jiggle {
+    animation: jiggle 1.2s ease-in-out;
+  }
+}
+
+.inbox-icon {
+  width: 18px;
+  height: 18px;
+  filter: invert(1) brightness(1.2);
+}
+
+.inbox-count {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  min-width: 7px;
+  height: 14px;
+  padding: 0 4px;
+  background: $error;
+  color: $white;
+  border-radius: 10px;
+  font-size: $font-size-xs;
+  @include flex-center;
+  font-weight: $font-weight-bold;
+}
+
+@keyframes jiggle {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-18deg); }
+  30% { transform: rotate(12deg); }
+  45% { transform: rotate(-8deg); }
+  60% { transform: rotate(6deg); }
+  75% { transform: rotate(-4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+// ============================================
+// Language Switcher
+// ============================================
+
+.lang-slot {
+  margin-right: $spacing-sm;
+  
+  .btn {
+    color: $white;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+    
+    &:hover {
+      color: $white;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.85);
+    }
+    
+    &:focus {
+      color: $white;
+      box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
+// ============================================
+// Links
+// ============================================
+
+.link {
+  color: $white;
+  text-decoration: none;
+  transition: $transition-base;
+  
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+// ============================================
+// Role Colors (Gradients)
+// ============================================
+
+.role-user {
+  background: linear-gradient(90deg, $primary, $primary-dark);
+}
+
+.role-garbadmin {
+  background: linear-gradient(90deg, $primary-dark, #3ea8a8);
+}
+
+.role-admin {
+  background: linear-gradient(95deg, #3caa77, #3f7fb1);
+}
+
+// ============================================
+// Bootstrap Navbar Overrides
+// ============================================
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.55);
+  
+  &:focus {
+    box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.35);
+  }
+}
+
+.navbar-toggler-icon {
+  filter: invert(1) brightness(2);
+}
+
+.navbar-nav {
+  .nav-link {
+    color: $white;
+    
+    &.active,
+    &:focus,
+    &:hover {
+      color: $white;
+      opacity: 0.85;
+    }
+  }
+}
+
+// ============================================
+// Responsive Collapse
+// ============================================
+
+.navbar {
+  .wallet-slot,
+  .inbox-slot,
+  .lang-slot,
+  .user-info {
+    margin-right: 0;
+  }
+  
+  .collapse.show .user-info {
+    margin-top: $spacing-sm;
+  }
+}
+
+@media (max-width: 991.9px) {
+  .navbar-nav {
+    margin-top: $spacing-md;
+  }
+  
+  .wallet-slot,
+  .inbox-slot,
+  .lang-slot {
+    order: 0;
+  }
+  
+  .user-info {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .logged {
+    display: none;
+  }
+}
+
+// Made with Bob

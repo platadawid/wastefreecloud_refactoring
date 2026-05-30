@@ -1,0 +1,426 @@
+// ============================================
+// WasteFree Design System - Form Styles
+// ============================================
+
+@import 'variables';
+@import 'mixins';
+
+// ============================================
+// Global Form Styles
+// ============================================
+
+// Form container
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+// Form group
+.form-group {
+  @include form-group;
+}
+
+// Input fields
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+input[type="url"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+  @include touch-input;
+  width: 100%;
+}
+
+// Select dropdowns
+select {
+  @include touch-select;
+  width: 100%;
+}
+
+// Textarea
+textarea {
+  @include touch-textarea;
+  width: 100%;
+}
+
+// Checkboxes and radios
+input[type="checkbox"],
+input[type="radio"] {
+  @include touch-checkbox;
+}
+
+// Checkbox/Radio labels
+.checkbox-label,
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  padding: $spacing-xs 0;
+  user-select: none;
+
+  input {
+    flex-shrink: 0;
+  }
+
+  span {
+    flex: 1;
+  }
+
+  @include mobile {
+    padding: $spacing-sm 0;
+    gap: $spacing-md;
+  }
+}
+
+// Checkbox/Radio group
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-lg;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
+}
+
+// ============================================
+// Button Styles
+// ============================================
+
+.btn {
+  @include touch-button;
+
+  &-primary {
+    @include button-primary;
+  }
+
+  &-secondary {
+    @include button-secondary;
+  }
+
+  &-danger {
+    @include button-danger;
+  }
+
+  &-block {
+    width: 100%;
+  }
+
+  &-sm {
+    min-height: 40px;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  &-lg {
+    min-height: 56px;
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+  }
+}
+
+// Button group
+.btn-group {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+
+  @include mobile {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// ============================================
+// Form Validation States
+// ============================================
+
+.form-control {
+  &.ng-invalid.ng-touched {
+    border-color: $danger;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($danger, 0.1);
+    }
+  }
+
+  &.ng-valid.ng-touched {
+    border-color: $success;
+  }
+}
+
+.invalid-feedback {
+  display: none;
+  margin-top: $spacing-xs;
+  color: $danger;
+  font-size: $font-size-xs;
+
+  &.show {
+    display: block;
+  }
+}
+
+.valid-feedback {
+  display: none;
+  margin-top: $spacing-xs;
+  color: $success;
+  font-size: $font-size-xs;
+
+  &.show {
+    display: block;
+  }
+}
+
+// ============================================
+// Form Layout Helpers
+// ============================================
+
+.form-row {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  @include mobile {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group {
+    flex: 1;
+    margin-bottom: 0;
+
+    @include mobile {
+      margin-bottom: $spacing-lg;
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: $spacing-sm;
+  justify-content: flex-end;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $border-color;
+
+  @include mobile {
+    flex-direction: column-reverse;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// ============================================
+// Floating Labels (Material-style)
+// ============================================
+
+.form-floating {
+  position: relative;
+
+  input,
+  select,
+  textarea {
+    padding-top: $spacing-lg;
+    padding-bottom: $spacing-xs;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      transform: translateY(-50%) scale(0.85);
+      color: $primary;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 50%;
+    left: $spacing-md;
+    transform: translateY(-50%);
+    color: $text-secondary;
+    pointer-events: none;
+    transition: all $transition-fast;
+    background-color: $white;
+    padding: 0 $spacing-2xs;
+    transform-origin: left center;
+  }
+
+  textarea + label {
+    top: $spacing-lg;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// Input Groups (with icons/buttons)
+// ============================================
+
+.input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  input {
+    flex: 1;
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: $radius-md;
+      border-bottom-left-radius: $radius-md;
+    }
+
+    &:last-child {
+      border-top-right-radius: $radius-md;
+      border-bottom-right-radius: $radius-md;
+    }
+  }
+
+  .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background-color: $gray-100;
+    border: 1px solid $border-color;
+    color: $text-secondary;
+    white-space: nowrap;
+
+    &:first-child {
+      border-top-left-radius: $radius-md;
+      border-bottom-left-radius: $radius-md;
+      border-right: 0;
+    }
+
+    &:last-child {
+      border-top-right-radius: $radius-md;
+      border-bottom-right-radius: $radius-md;
+      border-left: 0;
+    }
+  }
+
+  .btn {
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: $radius-md;
+      border-bottom-left-radius: $radius-md;
+    }
+
+    &:last-child {
+      border-top-right-radius: $radius-md;
+      border-bottom-right-radius: $radius-md;
+    }
+  }
+}
+
+// ============================================
+// Custom File Input
+// ============================================
+
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .file-label {
+    @include touch-button;
+    @include button-secondary;
+    width: 100%;
+    text-align: center;
+  }
+
+  .file-name {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    text-align: center;
+  }
+}
+
+// ============================================
+// Toggle Switch
+// ============================================
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .toggle-slider {
+      background-color: $primary;
+
+      &::before {
+        transform: translateX(24px);
+      }
+    }
+
+    &:focus + .toggle-slider {
+      box-shadow: 0 0 0 3px rgba($primary, 0.1);
+    }
+
+    &:disabled + .toggle-slider {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $gray-300;
+    transition: $transition-fast;
+    border-radius: 28px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: $white;
+      transition: $transition-fast;
+      border-radius: 50%;
+    }
+  }
+}
+
+// Made with Bob

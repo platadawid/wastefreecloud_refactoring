@@ -1,0 +1,550 @@
+// ============================================
+// Home Component Styles
+// ============================================
+
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+// ============================================
+// Landing Container
+// ============================================
+
+.landing-container {
+  max-width: 900px;
+  margin: $spacing-xl auto;
+  background: $white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  padding: $spacing-lg $spacing-md;
+  
+  @include mobile {
+    margin: $spacing-md;
+    padding: $spacing-md;
+  }
+}
+
+// ============================================
+// Landing Header
+// ============================================
+
+.landing-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  
+  h1 {
+    @include heading-1;
+    color: $primary-dark;
+    margin-bottom: $spacing-sm;
+  }
+  
+  p {
+    @include body-text;
+    font-size: $font-size-lg;
+    color: $gray-600;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.cta-btn {
+  @include button-primary;
+  font-size: $font-size-lg;
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-full;
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// ============================================
+// Features Section
+// ============================================
+
+.features {
+  margin-bottom: $spacing-xl;
+  
+  h2 {
+    @include heading-2;
+    text-align: center;
+    color: $primary-dark;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.feature-list {
+  @include flex-center;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
+  
+  @include mobile {
+    gap: $spacing-md;
+  }
+}
+
+.feature-item {
+  @include card;
+  background: $primary-lighter;
+  min-width: 220px;
+  text-align: center;
+  
+  @include mobile {
+    min-width: 100%;
+  }
+  
+  h3 {
+    @include heading-3;
+    color: $primary-dark;
+    margin-bottom: $spacing-xs;
+  }
+  
+  p {
+    @include body-text;
+    color: $gray-700;
+  }
+}
+
+// ============================================
+// About Section
+// ============================================
+
+.about {
+  margin-bottom: $spacing-xl;
+  text-align: center;
+  
+  h2 {
+    @include heading-2;
+    color: $primary-dark;
+    margin-bottom: $spacing-sm;
+  }
+  
+  p {
+    @include body-text;
+    font-size: $font-size-lg;
+    color: $gray-600;
+  }
+}
+
+// ============================================
+// Contact Section
+// ============================================
+
+.contact {
+  background: $info-light;
+  background: linear-gradient(135deg, rgba($info-light, 0.3), rgba($info, 0.1));
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-md;
+  max-width: 500px;
+  margin: 0 auto;
+  
+  @include mobile {
+    padding: $spacing-md;
+  }
+  
+  h2 {
+    @include heading-2;
+    color: $info-dark;
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
+  
+  form {
+    @include flex-column;
+    gap: $spacing-sm;
+  }
+  
+  input,
+  textarea {
+    @include input-base;
+    resize: none;
+  }
+  
+  button {
+    @include button-primary;
+    background: linear-gradient(90deg, $info-dark, $info);
+    margin-top: $spacing-xs;
+    
+    &:hover:not(:disabled) {
+      background: linear-gradient(90deg, $info, $info-light);
+    }
+  }
+}
+
+// ============================================
+// Hero Section
+// ============================================
+
+.hero {
+  background: linear-gradient(135deg, $primary, $primary-light);
+  color: $white;
+  padding: 100px 0 80px;
+  text-align: center;
+  border-radius: 0 0 $spacing-xl $spacing-xl;
+  box-shadow: $shadow-lg;
+  position: relative;
+  overflow: hidden;
+  
+  @include mobile {
+    padding: $spacing-xxl 0 $spacing-xl;
+    border-radius: 0 0 $spacing-lg $spacing-lg;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -60px;
+    transform: translateX(-50%);
+    width: 80vw;
+    height: 120px;
+    background: radial-gradient(circle, rgba($white, 0.2), transparent 70%);
+    opacity: 0.5;
+    z-index: 0;
+  }
+}
+
+.hero-title {
+  @include heading-1;
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-lg;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 24px rgba($black, 0.12);
+  
+  @include mobile {
+    font-size: $font-size-3xl;
+  }
+}
+
+.hero-desc {
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-xxl;
+  font-weight: $font-weight-medium;
+  text-shadow: 0 2px 8px rgba($primary, 0.1);
+  
+  @include mobile {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.btn-cta {
+  @include button-primary;
+  font-size: $font-size-xl;
+  padding: $spacing-md $spacing-xxl;
+  border-radius: $radius-full;
+  box-shadow: $shadow-lg;
+  
+  @include mobile {
+    font-size: $font-size-lg;
+    padding: $spacing-sm $spacing-xl;
+  }
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// ============================================
+// Feature Cards
+// ============================================
+
+.feature-card {
+  @include card;
+  @include card-hover;
+  border: none;
+  
+  &:hover {
+    background: linear-gradient(135deg, rgba($info-light, 0.2), rgba($warning-light, 0.1));
+  }
+}
+
+.feature-icon {
+  font-size: $font-size-4xl;
+  color: $primary;
+  margin-bottom: $spacing-md;
+  text-shadow: 0 2px 8px rgba($primary, 0.1);
+}
+
+// ============================================
+// Supported Cities Section
+// ============================================
+
+.supported-cities {
+  position: relative;
+  margin: 120px 0;
+  padding: $spacing-xxl 0;
+  background: radial-gradient(circle at top left, rgba($primary-light, 0.25), transparent 55%),
+              radial-gradient(circle at bottom right, rgba($success, 0.25), transparent 55%);
+  overflow: hidden;
+  border-radius: $spacing-xxl;
+  box-shadow: $shadow-xl;
+  
+  @include mobile {
+    margin: $spacing-xxl 0;
+    padding: $spacing-xl 0;
+    border-radius: $spacing-lg;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba($white, 0.16), transparent 60%);
+    pointer-events: none;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .lead {
+    max-width: 640px;
+    margin: $spacing-md auto 0;
+    color: rgba($black, 0.68);
+  }
+}
+
+.heading-kicker {
+  @include flex-center;
+  gap: $spacing-sm;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  background: rgba($success, 0.12);
+  color: $success-dark;
+  
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $success, $success-light);
+    box-shadow: 0 0 12px rgba($success, 0.6);
+  }
+}
+
+// ============================================
+// City Grid
+// ============================================
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: $spacing-lg;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.city-card {
+  position: relative;
+  padding: $spacing-lg $spacing-md;
+  border-radius: $radius-lg;
+  background: rgba($white, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  transform: translateY(20px);
+  animation: cityFloat 0.7s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+  transition: transform $transition-base, box-shadow $transition-base;
+  
+  &__halo {
+    position: absolute;
+    inset: -40% -20% auto;
+    height: 120px;
+    background: radial-gradient(circle, rgba($success, 0.4), transparent 70%);
+    opacity: 0.5;
+  }
+  
+  h3 {
+    @include heading-3;
+    color: $success-dark;
+    margin-bottom: $spacing-sm;
+    position: relative;
+    z-index: 1;
+  }
+  
+  p {
+    @include body-text;
+    margin-bottom: 0;
+    color: rgba($black, 0.6);
+    position: relative;
+    z-index: 1;
+  }
+  
+  &:nth-child(2n) {
+    animation-delay: 0.1s;
+  }
+  
+  &:nth-child(3n) {
+    animation-delay: 0.2s;
+  }
+  
+  &:nth-child(4n) {
+    animation-delay: 0.3s;
+  }
+  
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 38px rgba($success, 0.25);
+  }
+}
+
+.city-chip {
+  position: relative;
+  @include flex-center;
+  gap: 6px;
+  padding: 6px $spacing-sm;
+  border-radius: $radius-full;
+  background: linear-gradient(135deg, rgba($success, 0.15), rgba($info, 0.15));
+  color: $success-dark;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-size: $font-size-xs;
+  margin-bottom: $spacing-md;
+  z-index: 1;
+  
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $success, $success-light);
+    box-shadow: 0 0 8px rgba($success, 0.4);
+  }
+}
+
+// ============================================
+// Loading & Empty States
+// ============================================
+
+.cities-loader {
+  @include flex-center;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background: rgba($white, 0.75);
+  backdrop-filter: blur(12px);
+  box-shadow: $shadow-lg;
+  margin-bottom: $spacing-lg;
+}
+
+.loader-dot {
+  @include loading-spinner;
+  width: 10px;
+  height: 10px;
+  border: none;
+  background: linear-gradient(135deg, $info-dark, $info-light);
+  animation: loaderPulse 1.2s ease-in-out infinite;
+  
+  &:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  
+  &:nth-child(4) {
+    animation-delay: 0.45s;
+  }
+}
+
+.loader-label {
+  font-weight: $font-weight-semibold;
+  color: $success-dark;
+}
+
+.cities-empty,
+.cities-error {
+  text-align: center;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  background: rgba($white, 0.82);
+  backdrop-filter: blur(12px);
+  box-shadow: $shadow-lg;
+  font-weight: $font-weight-semibold;
+  color: rgba($black, 0.72);
+}
+
+.cities-error {
+  color: $error-dark;
+  background: rgba($error-light, 0.2);
+  box-shadow: 0 10px 30px rgba($error, 0.18);
+}
+
+// ============================================
+// Footer
+// ============================================
+
+.footer {
+  background: $primary;
+  color: $white;
+  padding: $spacing-lg 0;
+  text-align: center;
+  margin-top: $spacing-xxl;
+  border-radius: $spacing-xl $spacing-xl 0 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  letter-spacing: 1px;
+  box-shadow: 0 -4px 24px rgba($primary, 0.1);
+  
+  @include mobile {
+    padding: $spacing-md 0;
+    font-size: $font-size-base;
+  }
+}
+
+// ============================================
+// Card Overrides
+// ============================================
+
+.card {
+  .btn-success {
+    @include button-primary;
+    border-radius: $radius-full;
+    font-size: $font-size-lg;
+  }
+  
+  input,
+  textarea {
+    @include input-base;
+  }
+  
+  label {
+    font-weight: $font-weight-semibold;
+    color: $primary;
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+
+@keyframes loaderPulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes cityFloat {
+  to {
+    transform: translateY(0);
+  }
+}
+
+// Made with Bob

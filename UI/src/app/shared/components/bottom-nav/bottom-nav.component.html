@@ -1,0 +1,52 @@
+<nav class="bottom-nav" *ngIf="isAuthenticated()">
+  <a 
+    routerLink="/portal" 
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    class="bottom-nav__item"
+    [title]="'bottomNav.home' | translate"
+  >
+    <img src="/assets/images/home.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
+    <span class="bottom-nav__label">{{ 'bottomNav.home' | translate }}</span>
+  </a>
+
+  <a 
+    routerLink="/portal/groups" 
+    routerLinkActive="active"
+    class="bottom-nav__item"
+    [title]="'bottomNav.groups' | translate"
+  >
+    <img src="/assets/images/groups.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
+    <span class="bottom-nav__label">{{ 'bottomNav.groups' | translate }}</span>
+  </a>
+
+  <a
+    routerLink="/portal/my-pickups"
+    routerLinkActive="active"
+    class="bottom-nav__item"
+    [title]="'bottomNav.pickups' | translate"
+  >
+    <img src="/assets/images/pickup.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
+    <span class="bottom-nav__label">{{ 'bottomNav.pickups' | translate }}</span>
+  </a>
+
+  <a 
+    routerLink="/portal/wallet" 
+    routerLinkActive="active"
+    class="bottom-nav__item"
+    [title]="'bottomNav.wallet' | translate"
+  >
+    <img src="/assets/images/wallet.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
+    <span class="bottom-nav__label">{{ 'bottomNav.wallet' | translate }}</span>
+  </a>
+
+  <a 
+    routerLink="/portal/profile" 
+    routerLinkActive="active"
+    class="bottom-nav__item"
+    [title]="'bottomNav.profile' | translate"
+  >
+    <img src="/assets/images/user.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
+    <span class="bottom-nav__label">{{ 'bottomNav.profile' | translate }}</span>
+  </a>
+</nav>

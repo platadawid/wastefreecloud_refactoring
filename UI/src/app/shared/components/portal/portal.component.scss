@@ -1,0 +1,149 @@
+// ============================================
+// Component Styles
+// ============================================
+
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+/* Main portal flex wrapper (content sits to the right of fixed sidebar) */
+.portal-layout { 
+	height: calc(100dvh - var(--topbar-height, 56px) - 1px);
+	min-height: calc(100dvh - var(--topbar-height, 56px) - 1px);
+	position: relative; 
+	display: flex; 
+	flex-direction: row; 
+	width: calc(100% - 240px); /* avoid pushing content out of viewport */
+	margin-left: 240px; /* reserve space for fixed sidebar */
+}
+
+/* Fixed (stable) sidebar width */
+/* Fixed sidebar: independent of main scroll */
+.portal-sidebar {
+	position: fixed;
+	top: var(--topbar-height, 56px);
+	left: 0;
+	bottom: 0;
+	width: 240px;
+	flex: 0 0 240px;
+	max-width: 240px;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+	overflow: hidden;
+	display:flex;
+	flex-direction: column;
+	padding-top: 5px; /* breathing room under topbar */
+}
+.portal-sidebar.bg-light {
+	background:
+		radial-gradient(circle at 18% 0%, rgba(43, 182, 115, 0.10), transparent 40%),
+		radial-gradient(circle at 82% 100%, rgba(31, 139, 86, 0.08), transparent 42%),
+		linear-gradient(180deg, rgba(246, 255, 251, 0.70), rgba(236, 252, 245, 0.58));
+	-webkit-backdrop-filter: saturate(160%) blur(12px);
+	backdrop-filter: saturate(160%) blur(12px);
+	border-right: 1px solid rgba(31, 139, 86, 0.15);
+}
+
+.portal-sidebar .nav-link {
+	color: #1f2d3a;
+	border-radius: $spacing-xs;
+	margin: 4px $spacing-xs;
+	transition: background-color .18s ease, color .18s ease;
+	display: flex;
+	align-items: center;
+	padding: 0.75rem 0.9rem;
+	gap: 0.75rem;
+}
+.portal-sidebar .nav-link:hover {
+	background-color: rgba(43, 182, 115, 0.14);
+	color: #14212b;
+}
+.portal-sidebar .nav-link.active {
+	background-color: var(--primary-green, $primary);
+	color: $white;
+}
+.portal-sidebar .nav-link.active:hover {
+	background-color: var(--primary-green-dark, $primary-dark);
+}
+
+.portal-sidebar.portal-sidebar--garbageadmin .nav-link.active {
+	background-color: #3ea8a8;
+	color: $white;
+}
+
+.portal-sidebar.portal-sidebar--garbageadmin .nav-link.active:hover {
+	background-color: #3296a6;
+}
+
+.portal-sidebar.portal-sidebar--admin .nav-link {
+	color: #5c1f28;
+	border-radius: 10px;
+	margin: 4px 12px;
+}
+
+.portal-sidebar.portal-sidebar--admin .nav-link:hover {
+	background-color: rgba(227, 93, 106, 0.18);
+	color: #42141c;
+}
+
+.portal-sidebar.portal-sidebar--admin .nav-link.active {
+	background-color: rgba(227, 93, 106, 0.85);
+	color: $white;
+}
+
+.portal-sidebar.portal-sidebar--admin .nav-link.active:hover {
+	background-color: rgba(217, 77, 92, 0.92);
+}
+
+
+/* Sidebar nav uses flex so the last item (profile) can sit at bottom via mt-auto */
+.portal-sidebar .nav { display:flex; flex-direction: column; flex:1 1 auto; overflow: hidden; }
+
+/* Main content area scrolls; sized to viewport minus topbar */
+.portal-content { 
+	flex: 1 1 auto; 
+	min-width: 0; /* allow flexbox to shrink without overflow */
+	min-height: calc(100dvh - var(--topbar-height, 56px) - 1px);
+	height: calc(100dvh - var(--topbar-height, 56px) - 1px);
+	width: 100%;
+	overflow-y: auto; 
+	-webkit-overflow-scrolling: touch; 
+	scrollbar-gutter: stable both-edges; /* prevent layout shift when scrollbar appears */
+}
+
+/* Keep internal nav tidy */
+.portal-sidebar .nav { padding-bottom: 0; }
+
+/* Responsive: hide sidebar on mobile, show bottom-nav instead */
+@media (max-width: 767px) { /* Below md breakpoint */
+	.portal-sidebar {
+		display: none; /* Hide sidebar on mobile */
+	}
+	.portal-layout {
+		margin-left: 0;
+		width: 100%;
+	}
+	.portal-content {
+		padding-bottom: 80px; /* Space for bottom-nav */
+	}
+}
+
+/* Icon + text alignment */
+.portal-sidebar .nav-icon {
+	width: $spacing-md;
+	height: $spacing-md;
+	margin-right: 0;
+	display: inline-block;
+	object-fit: contain;
+}
+.portal-sidebar .nav-icon.nav-icon--pickup {
+	width: $spacing-md;
+	height: $spacing-md;
+}
+/* Only invert bitmap/svg image tags; inline SVG inherits currentColor */
+.portal-sidebar .nav-link.active img.nav-icon {
+	filter: brightness(0) invert(1);
+}
+.portal-sidebar .nav-text {
+	line-height: 1.2;
+	font-size: 0.98rem;
+	font-weight: 600;
+}
+

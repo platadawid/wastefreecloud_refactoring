@@ -1,0 +1,113 @@
+<div class="wallet container-fluid px-3">
+  <div class="card fancy-card border-0 shadow-lg mx-auto wallet-card">
+    <div class="card-header gradient-groups text-white py-3 position-relative overflow-hidden">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="card-heading">
+          <div class="card-heading__icon card-heading__icon--wallet">
+            <img src="/assets/images/wallet.svg" alt="" aria-hidden="true" />
+          </div>
+          <div>
+            <h5 class="mb-1 fw-bold">{{ 'wallet.title' | translate }}</h5>
+            <small class="opacity-75">{{ 'wallet.subtitle' | translate }}</small>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <div class="summary-pill wallet-summary">
+            <div class="summary-pill__label">{{ 'wallet.balance.label' | translate }}</div>
+            <div class="summary-pill__value">{{ balance | number:'1.2-2' }} PLN</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-accent"></div>
+    </div>
+
+    <div class="card-body card-body--compact wallet-body">
+      <div class="row g-4 wallet-panels">
+        <div class="col-12 col-xl-6">
+          <section class="panel-compact panel-compact--wallet panel-compact--topup h-100 position-relative">
+            <div class="wallet-panel__loader" *ngIf="topUpLoading">
+              <div class="spinner-border" role="status" aria-hidden="true"></div>
+            </div>
+            <div class="panel-title">
+              <i class="bi bi-arrow-up-circle-fill"></i>
+              <span>{{ 'wallet.topup.title' | translate }}</span>
+            </div>
+            <p class="panel-lead text-muted mb-3">{{ 'wallet.topup.desc' | translate }}</p>
+            <form [formGroup]="topUpForm" (ngSubmit)="topUp()" class="wallet-form" [class.is-busy]="topUpLoading">
+              <div class="form-field">
+                <label class="form-label" for="wallet-topup-amount">{{ 'wallet.topup.amount' | translate }}</label>
+                <input id="wallet-topup-amount" class="form-control" type="number" formControlName="amount" min="1" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="wallet-topup-blik">{{ 'wallet.topup.blik' | translate }}</label>
+                <input id="wallet-topup-blik" class="form-control" type="text" maxlength="6" formControlName="blikCode" [placeholder]="'wallet.topup.blik.placeholder' | translate" />
+                <div class="form-text text-danger" *ngIf="topUpForm.get('blikCode')?.invalid && topUpForm.get('blikCode')?.touched">{{ 'wallet.topup.blik.invalid' | translate }}</div>
+              </div>
+              <div class="wallet-form__actions">
+                <button type="submit" class="btn btn-success btn-elevated" [disabled]="topUpLoading || topUpForm.invalid">
+                  <span *ngIf="!topUpLoading" class="d-inline-flex align-items-center">
+                    <i class="bi bi-check2-circle"></i>
+                    {{ 'wallet.topup.submit' | translate }}
+                  </span>
+                  <span *ngIf="topUpLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-outline-secondary" (click)="topUpForm.reset({ amount: 10, blikCode: '' })" [disabled]="topUpLoading">
+                  {{ 'wallet.topup.reset' | translate }}
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div class="col-12 col-xl-6">
+          <section class="panel-compact panel-compact--wallet panel-compact--withdraw h-100 position-relative">
+            <div class="wallet-panel__loader" *ngIf="withdrawLoading">
+              <div class="spinner-border" role="status" aria-hidden="true"></div>
+            </div>
+            <div class="panel-title">
+              <i class="bi bi-arrow-down-circle-fill"></i>
+              <span>{{ 'wallet.withdraw.title' | translate }}</span>
+            </div>
+            <p class="panel-lead text-muted mb-3">{{ 'wallet.withdraw.desc' | translate }}</p>
+            <form [formGroup]="withdrawForm" (ngSubmit)="withdraw()" class="wallet-form" [class.is-busy]="withdrawLoading">
+              <div class="form-field">
+                <label class="form-label" for="wallet-withdraw-amount">{{ 'wallet.withdraw.amount' | translate }}</label>
+                <input id="wallet-withdraw-amount" class="form-control" type="number" formControlName="amount" min="1" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="wallet-withdraw-iban">{{ 'wallet.withdraw.iban' | translate }}</label>
+                <div id="wallet-withdraw-iban" class="iban-display">
+                  <span class="iban-pill"><code>{{ profileSvc.profile()?.bankAccountNumber || '—' }}</code></span>
+                  <small class="text-muted d-block mt-1">{{ 'wallet.withdraw.ibanReadOnly' | translate }}</small>
+                </div>
+              </div>
+              <div class="wallet-form__actions">
+                <button type="submit" class="btn btn-danger btn-elevated" [disabled]="withdrawLoading || withdrawForm.invalid">
+                  <span *ngIf="!withdrawLoading" class="d-inline-flex align-items-center">
+                    <i class="bi bi-arrow-return-left"></i>
+                    {{ 'wallet.withdraw.submit' | translate }}
+                  </span>
+                  <span *ngIf="withdrawLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-outline-secondary" (click)="withdrawForm.reset({ amount: 10 })" [disabled]="withdrawLoading">
+                  {{ 'wallet.withdraw.reset' | translate }}
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <div class="wallet-actions">
+        <a class="btn btn-outline-secondary wallet-actions__back" routerLink="/portal">
+          <span class="btn-icon btn-icon--back" aria-hidden="true">
+            <svg viewBox="0 0 16 16" role="img" focusable="false">
+              <path d="M15 8a.5.5 0 0 1-.5.5H4.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L4.707 7.5H14.5A.5.5 0 0 1 15 8Z" />
+            </svg>
+          </span>
+          <span>{{ 'wallet.back' | translate }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

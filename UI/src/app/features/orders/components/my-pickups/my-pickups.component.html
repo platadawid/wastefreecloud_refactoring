@@ -1,0 +1,194 @@
+<div class="container-fluid px-3 my-pickups">
+  <div class="card fancy-card h-100 border-0 shadow-lg mx-auto">
+  <div class="card-header gradient-groups text-white py-3 position-relative overflow-hidden">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="card-heading">
+          <div class="card-heading__icon card-heading__icon--list">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75V3a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 3v.75M4.5 6h15M6 6v14.25A1.5 1.5 0 0 0 7.5 21.75h9a1.5 1.5 0 0 0 1.5-1.5V6M10 10.5v7.5M14 10.5v7.5" />
+            </svg>
+          </div>
+          <div>
+            <h5 class="mb-1 fw-bold">{{ 'myPickups.title' | translate }}</h5>
+            <small class="opacity-75">{{ 'myPickups.subtitle' | translate }}</small>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <div class="me-2 small summary-pill">
+            <div class="fw-semibold">{{ 'myPickups.total' | translate }}</div>
+            <div class="fs-5 lh-1">{{ totalCount() }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-accent"></div>
+    </div>
+    <div class="card-body p-0 d-flex flex-column">
+      <div *ngIf="loading()" class="my-pickups__loading">
+        <div class="spinner-border" role="status" aria-hidden="true"></div>
+        <div class="small text-muted">{{ 'myPickups.loading' | translate }}</div>
+      </div>
+
+      <div class="alert alert-danger m-3" *ngIf="!loading() && error()" role="alert">
+        {{ error()! | translate }}
+      </div>
+
+      <ng-container *ngIf="!loading()">
+        <ng-container *ngIf="hasAnyPickups() || pickups().length">
+          <div class="my-pickups__filters">
+            <div class="filter-control">
+              <label class="form-label small fw-semibold filter-label" for="statusFilter">{{ 'myPickups.filters.status.label' | translate }}</label>
+              <select
+                id="statusFilter"
+                name="statusFilter"
+                class="form-select form-select-sm"
+                [ngModel]="statusFilter()"
+                (ngModelChange)="setStatusFilter($event)"
+                [ngModelOptions]="{ standalone: true }"
+                [attr.aria-label]="'myPickups.filters.status.label' | translate"
+              >
+                <option value="all">{{ 'myPickups.filters.status.all' | translate }}</option>
+                <option *ngFor="let status of statusOptions()" [value]="status">
+                  {{ statusTranslationKey(status) | translate }}
+                </option>
+              </select>
+            </div>
+            <div class="filter-control">
+              <label class="form-label small fw-semibold filter-label" for="groupFilter">{{ 'myPickups.filters.group.label' | translate }}</label>
+              <select
+                id="groupFilter"
+                name="groupFilter"
+                class="form-select form-select-sm"
+                [ngModel]="groupFilter()"
+                (ngModelChange)="setGroupFilter($event)"
+                [ngModelOptions]="{ standalone: true }"
+                [attr.aria-label]="'myPickups.filters.group.label' | translate"
+              >
+                <option value="all">{{ 'myPickups.filters.group.all' | translate }}</option>
+                <option *ngFor="let group of groupOptions()" [value]="group.id">
+                  {{ group.isPrivate ? ('pickupOrder.step.participants.privateGroup' | translate) : group.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="pickups().length; else filteredEmpty">
+            <div class="table-responsive my-pickups__table-wrapper">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ 'myPickups.table.orderNumber' | translate }}</th>
+                    <th scope="col">{{ 'myPickups.table.group' | translate }}</th>
+                    <th scope="col">{{ 'myPickups.table.status' | translate }}</th>
+                    <th scope="col">{{ 'myPickups.table.cost' | translate }}</th>
+                    <th scope="col">{{ 'myPickups.table.collectDate' | translate }}</th>
+                    <th scope="col">{{ 'myPickups.table.option' | translate }}</th>
+                    <th scope="col" class="text-end">{{ 'myPickups.table.actions' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pickup of pickups(); trackBy: trackByOrder">
+                    <td>
+                      <span class="order-number">#{{ orderCode(pickup) }}</span>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="pickup.groupId && !pickup.isPrivateGroup; else groupNameOnly">
+                        <a class="group-link" [routerLink]="['/portal/groups', pickup.groupId]">
+                          <i class="bi bi-arrow-up-right-circle" aria-hidden="true"></i>
+                          <span class="group-link__label">
+                            {{ pickup.isPrivateGroup ? ('pickupOrder.step.participants.privateGroup' | translate) : pickup.groupName }}
+                          </span>
+                        </a>
+                      </ng-container>
+                      <ng-template #groupNameOnly>
+                        <span class="group-link group-link--static">
+                          <i class="bi bi-people" aria-hidden="true"></i>
+                          <span class="group-link__label">
+                            {{ pickup.isPrivateGroup ? ('pickupOrder.step.participants.privateGroup' | translate) : pickup.groupName }}
+                          </span>
+                        </span>
+                      </ng-template>
+                    </td>
+                    <td>
+                      <span [class]="statusClass(pickup.status)">
+                        {{ statusTranslationKey(pickup.status) | translate }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="fw-semibold">{{ pickup.cost | number:'1.2-2' }} PLN</span>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="pickup.pickupDate; else noPickupDate">
+                        {{ pickup.pickupDate | date:'yyyy-MM-dd' }} • {{ pickup.pickupDate | date:'HH:mm' }}
+                      </ng-container>
+                      <ng-template #noPickupDate>--</ng-template>
+                    </td>
+                    <td>
+                      <span class="option-chip">{{ pickupOptionKey(pickup.pickupOption) | translate }}</span>
+                    </td>
+                    <td class="text-end">
+                      <button type="button" class="btn pickup-details-btn d-inline-flex align-items-center justify-content-center text-center" (click)="openDetails(pickup)">
+                        <span>{{ 'myPickups.actions.viewDetails' | translate }}</span>
+                        <i class="bi bi-arrow-right-circle" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="my-pickups__pagination" *ngIf="totalCount()">
+              <div class="my-pickups__pagination-info small text-muted">
+                {{ 'myPickups.pagination.showingLabel' | translate }} {{ totalCount() === 0 ? 0 : pageStartIndex() + 1 }}-{{ pageEndIndex() }} {{ 'myPickups.pagination.ofLabel' | translate }} {{ totalCount() }} {{ 'myPickups.pagination.itemsLabel' | translate }}
+              </div>
+              <div class="my-pickups__pagination-controls" *ngIf="totalPages() > 1">
+                <button type="button" class="page-btn" (click)="previousPage()" [disabled]="currentPage() === 1">
+                  <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                  <span>{{ 'myPickups.pagination.previous' | translate }}</span>
+                </button>
+                <button
+                  type="button"
+                  class="page-btn"
+                  *ngFor="let page of pages()"
+                  (click)="goToPage(page)"
+                  [class.active]="page === currentPage()"
+                >
+                  {{ page }}
+                </button>
+                <button
+                  type="button"
+                  class="page-btn"
+                  (click)="nextPage()"
+                  [disabled]="totalPages() === 0 || currentPage() === totalPages()"
+                >
+                  <span>{{ 'myPickups.pagination.next' | translate }}</span>
+                  <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #filteredEmpty>
+        <ng-container *ngIf="hasAnyPickups(); else emptyState">
+          <div class="empty-state text-center text-muted my-pickups__empty-filtered">
+            <div class="empty-visual">
+              <i class="bi bi-funnel"></i>
+            </div>
+            <p class="fw-semibold mb-1">{{ 'myPickups.empty.filtered' | translate }}</p>
+            <small class="opacity-75">{{ 'myPickups.empty.filteredHint' | translate }}</small>
+          </div>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #emptyState>
+        <div class="empty-state text-center text-muted">
+          <div class="empty-visual">
+            <i class="bi bi-truck"></i>
+          </div>
+          <p class="fw-semibold mb-1">{{ 'myPickups.empty.title' | translate }}</p>
+          <small class="opacity-75">{{ 'myPickups.empty.desc' | translate }}</small>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

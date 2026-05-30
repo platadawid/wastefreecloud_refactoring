@@ -1,0 +1,83 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-bottom-nav;
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  background: $white;
+  border-top: 1px solid $gray-200;
+  box-shadow: $shadow-lg;
+  
+  padding: $spacing-xs 0;
+  height: 64px;
+  
+  // Hide on desktop
+  @include respond-to('md') {
+    display: none;
+  }
+
+  &__item {
+    @include flex-center;
+    flex-direction: column;
+    gap: $spacing-2xs;
+    
+    flex: 1;
+    padding: $spacing-2xs $spacing-xs;
+    
+    color: $gray-600;
+    text-decoration: none;
+    
+    transition: $transition-base;
+    
+    // Touch-friendly tap target
+    min-height: 48px;
+    min-width: 48px;
+    
+    &:hover,
+    &:focus {
+      color: $primary;
+      background: $gray-50;
+    }
+    
+    &.active {
+      color: $primary;
+      font-weight: $font-weight-semibold;
+      
+      .bottom-nav__icon {
+        filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(162deg) brightness(97%) contrast(101%);
+      }
+    }
+    
+    // Active state tap feedback
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: $transition-base;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+// Add padding to body to prevent content from being hidden behind bottom nav
+// Note: This should be in global styles, but included here for reference
+
+// Made with Bob
