@@ -71,8 +71,8 @@
   color: $white;
   
   @include mobile {
-    padding: $spacing-2xs $spacing-xs;
-    gap: $spacing-2xs;
+    padding: $spacing-2xs 6px;
+    gap: 4px;
   }
 }
 
@@ -102,8 +102,9 @@
   box-shadow: $shadow-sm;
   
   @include mobile {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
+    border-width: 1.5px;
   }
 }
 
@@ -188,9 +189,14 @@
   }
   
   @include mobile {
-    padding: $spacing-2xs;
-    margin-left: $spacing-2xs;
-    padding-left: $spacing-2xs;
+    padding: 4px;
+    margin-left: 4px;
+    padding-left: 4px;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
     
     span {
       display: none;
@@ -219,8 +225,8 @@
   transition: $transition-base;
   
   @include mobile {
-    padding: $spacing-2xs $spacing-xs;
-    gap: $spacing-2xs;
+    padding: 6px 10px;
+    gap: 6px;
   }
   
   &:hover {
@@ -235,6 +241,11 @@
   height: 18px;
   object-fit: contain;
   filter: invert(1) brightness(1.2);
+  
+  @include mobile {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .wallet-value {
@@ -248,7 +259,7 @@
   font-weight: $font-weight-bold;
   
   @include mobile {
-    font-size: $font-size-xs;
+    font-size: $font-size-sm;
   }
 }
 
@@ -256,6 +267,10 @@
   font-size: $font-size-xs;
   opacity: 0.9;
   margin-top: 1px;
+  
+  @include mobile {
+    font-size: 10px;
+  }
   
   @media (max-width: 520px) {
     display: none;
@@ -284,6 +299,12 @@
   cursor: pointer;
   transition: $transition-base;
   
+  @include mobile {
+    width: 34px;
+    height: 32px;
+    padding: 6px;
+  }
+  
   &:hover {
     background: rgba(255, 255, 255, 0.15);
   }
@@ -297,6 +318,11 @@
   width: 18px;
   height: 18px;
   filter: invert(1) brightness(1.2);
+  
+  @include mobile {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .inbox-count {

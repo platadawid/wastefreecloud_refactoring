@@ -19,8 +19,8 @@
   padding: $spacing-xs 0;
   height: 64px;
   
-  // Hide on desktop
-  @include respond-to('md') {
+  // Hide on desktop (768px and above)
+  @include tablet {
     display: none;
   }
 
