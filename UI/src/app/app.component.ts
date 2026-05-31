@@ -19,12 +19,14 @@ export class AppComponent {
   title = 'WasteFree';
   dropdownOpen = false;
   showGlobalLang = true;
+  showBottomNav = false;
   toastr = inject(ToastrService);
 
   constructor(public t: TranslationService, private router: Router) {
     const check = () => {
       const url = this.router.url || '';
       this.showGlobalLang = !url.startsWith('/portal');
+      this.showBottomNav = url.startsWith('/portal');
     };
     check();
     this.router.events.subscribe(e => { if (e instanceof NavigationEnd) check(); });
