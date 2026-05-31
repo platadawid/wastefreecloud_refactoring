@@ -11,25 +11,27 @@
     <span class="bottom-nav__label">{{ 'bottomNav.home' | translate }}</span>
   </a>
 
-  <a
-    routerLink="/portal/groups"
-    routerLinkActive="active"
+  <button
+    type="button"
     class="bottom-nav__item"
+    [class.active]="isGroupsActive()"
     [title]="'bottomNav.groups' | translate"
+    (click)="openActionSheet('groups', $event)"
   >
     <img src="/assets/images/groups.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
     <span class="bottom-nav__label">{{ 'bottomNav.groups' | translate }}</span>
-  </a>
+  </button>
 
-  <a
-    routerLink="/portal/my-pickups"
-    routerLinkActive="active"
+  <button
+    type="button"
     class="bottom-nav__item"
+    [class.active]="isPickupsActive()"
     [title]="'bottomNav.pickups' | translate"
+    (click)="openActionSheet('pickups', $event)"
   >
     <img src="/assets/images/pickup.svg" alt="" class="bottom-nav__icon" aria-hidden="true" />
     <span class="bottom-nav__label">{{ 'bottomNav.pickups' | translate }}</span>
-  </a>
+  </button>
 
   <a
     routerLink="/portal/wallet"
@@ -109,3 +111,66 @@
     <span class="bottom-nav__label">{{ 'bottomNav.profile' | translate }}</span>
   </a>
 </nav>
+
+<!-- Action Sheet Overlay -->
+<div class="action-sheet-overlay" *ngIf="activeSheet" (click)="closeActionSheet()"></div>
+
+<!-- Groups Action Sheet -->
+<div class="action-sheet" *ngIf="activeSheet === 'groups'" [@slideUp]>
+  <div class="action-sheet__header">
+    <h3 class="action-sheet__title">{{ 'bottomNav.groups.menu.title' | translate }}</h3>
+  </div>
+  <div class="action-sheet__content">
+    <button type="button" class="action-sheet__option" (click)="navigateAndClose('/portal/groups')">
+      <img src="/assets/images/groups.svg" alt="" class="action-sheet__icon" aria-hidden="true" />
+      <span class="action-sheet__label">{{ 'bottomNav.groups.menu.myGroups' | translate }}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="action-sheet__arrow" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+    <button type="button" class="action-sheet__option" (click)="navigateAndClose('/portal/groups/manage')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="action-sheet__icon" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      <span class="action-sheet__label">{{ 'bottomNav.groups.menu.joinCreate' | translate }}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="action-sheet__arrow" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
+  <div class="action-sheet__footer">
+    <button type="button" class="action-sheet__cancel" (click)="closeActionSheet()">
+      {{ 'bottomNav.actionSheet.cancel' | translate }}
+    </button>
+  </div>
+</div>
+
+<!-- Pickups Action Sheet -->
+<div class="action-sheet" *ngIf="activeSheet === 'pickups'" [@slideUp]>
+  <div class="action-sheet__header">
+    <h3 class="action-sheet__title">{{ 'bottomNav.pickups.menu.title' | translate }}</h3>
+  </div>
+  <div class="action-sheet__content">
+    <button type="button" class="action-sheet__option" (click)="navigateAndClose('/portal/pickup-order')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="action-sheet__icon" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      <span class="action-sheet__label">{{ 'bottomNav.pickups.menu.order' | translate }}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="action-sheet__arrow" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+    <button type="button" class="action-sheet__option" (click)="navigateAndClose('/portal/my-pickups')">
+      <img src="/assets/images/pickup.svg" alt="" class="action-sheet__icon" aria-hidden="true" />
+      <span class="action-sheet__label">{{ 'bottomNav.pickups.menu.myPickups' | translate }}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="action-sheet__arrow" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
+  <div class="action-sheet__footer">
+    <button type="button" class="action-sheet__cancel" (click)="closeActionSheet()">
+      {{ 'bottomNav.actionSheet.cancel' | translate }}
+    </button>
+  </div>
+</div>

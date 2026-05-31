@@ -34,6 +34,9 @@
     
     color: $gray-600;
     text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     
     transition: $transition-base;
     
@@ -74,6 +77,160 @@
     line-height: 1;
     text-align: center;
     white-space: nowrap;
+  }
+}
+
+// ============================================
+// Action Sheet
+// ============================================
+
+.action-sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: $z-modal - 1;
+  animation: fadeIn 250ms ease-out;
+  
+  @include tablet {
+    display: none;
+  }
+}
+
+.action-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-modal;
+  
+  background: $white;
+  border-radius: $radius-lg $radius-lg 0 0;
+  box-shadow: $shadow-xl;
+  
+  max-height: 80vh;
+  overflow-y: auto;
+  
+  // Hide on desktop
+  @include tablet {
+    display: none;
+  }
+  
+  &__header {
+    padding: $spacing-md $spacing-lg $spacing-sm;
+    border-bottom: 1px solid $gray-200;
+  }
+  
+  &__title {
+    margin: 0;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $gray-900;
+    text-align: center;
+  }
+  
+  &__content {
+    padding: $spacing-xs 0;
+  }
+  
+  &__option {
+    @include flex-between;
+    width: 100%;
+    padding: $spacing-md $spacing-lg;
+    
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $gray-100;
+    
+    color: $gray-900;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    text-align: left;
+    
+    cursor: pointer;
+    transition: $transition-base;
+    
+    // Touch-friendly tap target
+    min-height: 56px;
+    
+    &:hover,
+    &:focus {
+      background: $gray-50;
+    }
+    
+    &:active {
+      background: $gray-100;
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  &__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-right: $spacing-sm;
+    color: $primary;
+  }
+  
+  &__label {
+    flex: 1;
+    color: $gray-900;
+  }
+  
+  &__arrow {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: $gray-400;
+    margin-left: $spacing-sm;
+  }
+  
+  &__footer {
+    padding: $spacing-sm $spacing-lg $spacing-lg;
+    border-top: 1px solid $gray-200;
+  }
+  
+  &__cancel {
+    @include flex-center;
+    width: 100%;
+    padding: $spacing-md;
+    
+    background: $gray-100;
+    border: none;
+    border-radius: $radius-md;
+    
+    color: $gray-700;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    
+    cursor: pointer;
+    transition: $transition-base;
+    
+    // Touch-friendly tap target
+    min-height: 48px;
+    
+    &:hover,
+    &:focus {
+      background: $gray-200;
+    }
+    
+    &:active {
+      background: $gray-300;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

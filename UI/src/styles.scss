@@ -39,6 +39,7 @@ body {
 
 :root {
   --topbar-height: 72px;
+  --bottom-nav-height: 64px;
   --primary-green: #{$primary};
   --primary-green-dark: #{$primary-dark};
   --topbar-contrast: rgba(255, 255, 255, 0.08);
@@ -219,6 +220,101 @@ body.portal-bg {
 
 * {
   @include scrollbar;
+}
+
+// ============================================
+// Mobile Responsive Adjustments
+// ============================================
+
+// Add padding to body when bottom nav is visible (mobile only)
+@include mobile {
+  body {
+    padding-bottom: var(--bottom-nav-height);
+  }
+  
+  // Ensure portal content doesn't get hidden behind bottom nav
+  .portal-content {
+    padding-bottom: $spacing-lg;
+  }
+  
+  // Remove padding on mobile for full-width layouts
+  .container,
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  // Make cards more compact on mobile
+  .card {
+    margin-bottom: $spacing-sm;
+    
+    .card-body {
+      padding: $spacing-sm;
+    }
+  }
+  
+  // Responsive tables - allow horizontal scroll
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  // Stack buttons vertically on mobile
+  .btn-group-mobile-stack {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+  
+  // Reduce heading sizes on mobile
+  h1, .h1 { font-size: $font-size-xl; }
+  h2, .h2 { font-size: $font-size-lg; }
+  h3, .h3 { font-size: $font-size-base; }
+  
+  // Make modals full-screen on mobile
+  .modal-dialog {
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+    
+    .modal-content {
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+}
+
+// Tablet adjustments
+@include tablet {
+  .container {
+    max-width: 100%;
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+  }
+}
+
+// Hide sidebar on mobile, show on tablet+
+.portal-sidebar {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+// Make portal content full-width on mobile
+.portal-layout {
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.portal-content {
+  @include mobile {
+    width: 100%;
+    padding: 0; // Remove padding on mobile for full-width
+  }
 }
 
 // Made with Bob

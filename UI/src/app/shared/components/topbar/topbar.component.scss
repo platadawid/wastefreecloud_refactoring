@@ -24,8 +24,8 @@
   gap: $spacing-xs;
   
   @include tablet {
-    padding: $spacing-xs $spacing-lg;
-    gap: $spacing-md;
+    padding: $spacing-2xs $spacing-lg;
+    gap: $spacing-sm;
   }
 }
 
@@ -35,7 +35,7 @@
   gap: $spacing-xs;
   
   @include tablet {
-    gap: $spacing-sm;
+    gap: $spacing-xs;
   }
 }
 
@@ -50,6 +50,22 @@
   
   @include mobile {
     font-size: $font-size-sm;
+  }
+}
+
+.brand-desktop {
+  display: inline;
+  
+  @include mobile {
+    display: none;
+  }
+}
+
+.brand-mobile {
+  display: none;
+  
+  @include mobile {
+    display: inline;
   }
 }
 
@@ -69,6 +85,11 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: $radius-full;
   color: $white;
+  
+  @include tablet {
+    padding: 6px $spacing-sm;
+    gap: $spacing-2xs;
+  }
   
   @include mobile {
     padding: $spacing-2xs 6px;
@@ -210,7 +231,11 @@
 
 .wallet-slot {
   @include flex-center;
-  margin-right: $spacing-sm;
+  margin-right: $spacing-xs;
+  
+  @include tablet {
+    margin-right: $spacing-xs;
+  }
 }
 
 .wallet-pill {
@@ -223,6 +248,11 @@
   text-decoration: none;
   font-weight: $font-weight-semibold;
   transition: $transition-base;
+  
+  @include tablet {
+    padding: 6px $spacing-xs;
+    gap: $spacing-2xs;
+  }
   
   @include mobile {
     padding: 6px 10px;
@@ -283,7 +313,11 @@
 
 .inbox-slot {
   @include flex-center;
-  margin-right: $spacing-sm;
+  margin-right: $spacing-xs;
+  
+  @include tablet {
+    margin-right: $spacing-xs;
+  }
 }
 
 .inbox-pill {
@@ -298,6 +332,12 @@
   border: none;
   cursor: pointer;
   transition: $transition-base;
+  
+  @include tablet {
+    width: 36px;
+    height: 32px;
+    padding: 6px;
+  }
   
   @include mobile {
     width: 34px;
@@ -355,7 +395,11 @@
 // ============================================
 
 .lang-slot {
-  margin-right: $spacing-sm;
+  margin-right: $spacing-xs;
+  
+  @include tablet {
+    margin-right: $spacing-xs;
+  }
   
   .btn {
     color: $white;

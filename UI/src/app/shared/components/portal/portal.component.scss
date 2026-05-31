@@ -4,6 +4,13 @@
 
 @import '../../../../styles/variables';
 @import '../../../../styles/mixins';
+
+// Remove padding on mobile for edge-to-edge layout
+@include mobile {
+  .portal-content > div {
+    padding: 0 !important;
+  }
+}
 /* Main portal flex wrapper (content sits to the right of fixed sidebar) */
 .portal-layout { 
 	height: calc(100dvh - var(--topbar-height, 56px) - 1px);
@@ -97,15 +104,43 @@
 .portal-sidebar .nav { display:flex; flex-direction: column; flex:1 1 auto; overflow: hidden; }
 
 /* Main content area scrolls; sized to viewport minus topbar */
-.portal-content { 
-	flex: 1 1 auto; 
+.portal-content {
+	flex: 1 1 auto;
 	min-width: 0; /* allow flexbox to shrink without overflow */
 	min-height: calc(100dvh - var(--topbar-height, 56px) - 1px);
 	height: calc(100dvh - var(--topbar-height, 56px) - 1px);
 	width: 100%;
-	overflow-y: auto; 
-	-webkit-overflow-scrolling: touch; 
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 	scrollbar-gutter: stable both-edges; /* prevent layout shift when scrollbar appears */
+	
+	@include mobile {
+		scrollbar-gutter: auto; /* Remove reserved space for scrollbar on mobile */
+		overflow-y: overlay; /* Overlay scrollbar that doesn't affect layout */
+		
+		/* Custom overlay scrollbar styling for mobile */
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+		
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+		
+		&::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 3px;
+			transition: background 0.3s ease;
+		}
+		
+		&::-webkit-scrollbar-thumb:hover {
+			background: rgba(0, 0, 0, 0.3);
+		}
+		
+		/* Auto-hide scrollbar when not scrolling */
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+	}
 }
 
 /* Keep internal nav tidy */

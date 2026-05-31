@@ -149,6 +149,7 @@
   "topbar.openWallet": "Open wallet",
   "topbar.goPortal": "Go to portal",
   "topbar.portalTitle": "WasteFree Portal",
+  "topbar.portalTitleMobile": "WasteFree",
   "topbar.openInbox" : "Open inbox"
   ,
   "inbox.title": "Notifications",
@@ -653,5 +654,12 @@
   "bottomNav.groups": "Groups",
   "bottomNav.pickups": "Pickups",
   "bottomNav.wallet": "Wallet",
-  "bottomNav.profile": "Profile"
+  "bottomNav.profile": "Profile",
+  "bottomNav.groups.menu.title": "Garbage groups",
+  "bottomNav.groups.menu.myGroups": "My groups",
+  "bottomNav.groups.menu.joinCreate": "Create or join",
+  "bottomNav.pickups.menu.title": "Waste pickups",
+  "bottomNav.pickups.menu.order": "Order pickup",
+  "bottomNav.pickups.menu.myPickups": "My pickups",
+  "bottomNav.actionSheet.cancel": "Cancel"
 }

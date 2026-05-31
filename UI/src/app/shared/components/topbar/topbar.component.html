@@ -1,6 +1,9 @@
 <nav *ngIf="visible" class="topbar navbar" [ngClass]="topbarClass">
   <div class="container-fluid topbar-inner">
-    <a class="navbar-brand brand text-white" routerLink="/portal">{{ 'topbar.portalTitle' | translate }}</a>
+    <a class="navbar-brand brand text-white" routerLink="/portal">
+      <span class="brand-desktop">{{ 'topbar.portalTitle' | translate }}</span>
+      <span class="brand-mobile">{{ 'topbar.portalTitleMobile' | translate }}</span>
+    </a>
 
     <div class="topbar-content">
       <div class="d-flex align-items-center gap-2">

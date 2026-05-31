@@ -17,20 +17,21 @@
 	border-radius: $radius-full;
 	
 	@include mobile {
-		padding: 3px 7px;
+		padding: 6px;
 		font-size: 11px;
 		line-height: 1.1;
 		min-height: auto;
-		height: 26px;
+		height: 32px;
+		width: 32px;
+		gap: 0 !important;
 		
 		img {
-			width: 16px;
-			height: 11px;
+			width: 18px;
+			height: 13px;
 		}
 		
-		span {
-			font-size: 11px;
-			font-weight: 500;
+		.lang-text {
+			display: none;
 		}
 	}
 }

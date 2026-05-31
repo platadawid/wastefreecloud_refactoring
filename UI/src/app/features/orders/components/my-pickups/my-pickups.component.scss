@@ -70,6 +70,157 @@
   padding:1.7rem 1.5rem 1.6rem;
   box-shadow:inset 0 -1px 0 rgba(255,255,255,0.22);
 }
+
+// ============================================
+// Desktop/Mobile Toggle
+// ============================================
+
+.my-pickups-desktop {
+  display: block;
+
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.my-pickups-mobile {
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
+}
+
+// ============================================
+// Mobile Styles
+// ============================================
+
+@include mobile {
+  .my-pickups-desktop {
+    .my-pickups {
+      padding: 0;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .my-pickups::before {
+      display: none;
+    }
+  }
+
+  .my-pickups-mobile {
+    padding: 0 !important;
+    padding-block: 0 !important;
+    margin: 0 !important;
+    margin-inline: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.my-pickups-mobile__header {
+  padding: 1.25rem 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #00d4aa 0%, #00b894 50%, #00a884 100%);
+  box-shadow: 0 4px 20px rgba(0, 180, 148, 0.25);
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.my-pickups-mobile__header::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  right: -30%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+.mobile-header__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.15));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-header__icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: $white;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+.my-pickups-mobile__header h5 {
+  font-size: 1.125rem;
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.my-pickups-mobile__header small {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-summary-pill {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 0.375rem 0.75rem;
+  min-width: 3rem;
+  text-align: center;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.mobile-summary-pill__value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+.my-pickups-mobile__content {
+  background: transparent;
+  min-height: calc(100vh - var(--topbar-height, 60px) - var(--bottom-nav-height, 64px) - 80px);
+  padding-bottom: 0;
+}
 .my-pickups .fancy-card .card-header h5 { font-size:1.5rem; }
 .my-pickups .fancy-card .card-header small { font-size:.95rem; letter-spacing:.01em; }
 
@@ -131,11 +282,41 @@
 .group-link--static .bi { color:#adb5bd; }
 
 .status-chip { display:inline-flex; align-items:center; gap:.35rem; padding:.28rem .75rem; border-radius:.65rem; font-size:.77rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; border:1px solid transparent; box-shadow:0 6px 14px rgba(15,32,62,0.08); background:linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.75)); }
-.status-pending { background:var(--wf-status-pending-bg); color:var(--wf-status-pending); border-color:rgba(255,193,7,0.4); }
-.status-scheduled { background:var(--wf-status-scheduled-bg); color:var(--wf-status-scheduled); border-color:rgba(13,110,253,0.32); }
-.status-completed { background:var(--wf-status-completed-bg); color:var(--wf-status-completed); border-color:rgba(25,135,84,0.32); }
-.status-complained { background:var(--wf-status-complained-bg); color:var(--wf-status-complained); border-color:rgba(220,53,69,0.35); }
-.status-cancelled { background:var(--wf-status-cancelled-bg); color:var(--wf-status-cancelled); border-color:rgba(108,117,125,0.32); }
+.status-pending {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.25));
+  color: #d97706;
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+  font-weight: 800;
+}
+.status-scheduled {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.25));
+  color: #2563eb;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  font-weight: 800;
+}
+.status-completed {
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 184, 148, 0.25));
+  color: #00a884;
+  border: 2px solid rgba(0, 184, 148, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+  font-weight: 800;
+}
+.status-complained {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.25));
+  color: #dc2626;
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+  font-weight: 800;
+}
+.status-cancelled {
+  background: linear-gradient(135deg, rgba(107, 114, 128, 0.15), rgba(107, 114, 128, 0.25));
+  color: #6b7280;
+  border: 2px solid rgba(107, 114, 128, 0.3);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.15);
+  font-weight: 800;
+}
 
 .option-chip { display:inline-flex; align-items:center; padding:.28rem .75rem; border-radius:.75rem; font-size:.78rem; font-weight:600; background:rgba(248,249,252,0.9); color:#1b2e44; border:1px solid var(--wf-border-subtle); box-shadow:0 6px $spacing-sm rgba(15,32,62,0.05); }
 
@@ -157,21 +338,47 @@
 
 @keyframes fadeIn { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:translateY(0);} }
 
-@media (max-width:991.9$spacing-xs) {
+@include tablet {
   .my-pickups__table-wrapper { padding:1rem; }
   .my-pickups__table-wrapper table { min-width:45rem; }
   .my-pickups .fancy-card .card-header { padding:1.5rem; }
-}
-
-@media (max-width:767.9$spacing-xs) {
   .my-pickups__filters { justify-content:flex-start; padding:.9rem 1rem .4rem; gap:.65rem; }
   .my-pickups__filters .filter-control { width:100%; justify-content:space-between; }
   .my-pickups__table-wrapper { padding:0 1rem 1.25rem; }
   .my-pickups__pagination { padding:1rem; }
 }
 
-@media (max-width:575.9$spacing-xs) {
-  .my-pickups__filters .filter-control { flex:1 1 100%; justify-content:space-between; padding:.5rem; }
+@include mobile {
+  .my-pickups-mobile {
+    .my-pickups__filters {
+      background: transparent;
+      border-bottom: none;
+      padding: 0.5rem 0.5rem 0.35rem 0.5rem;
+      gap: 0.5rem;
+    }
+    
+    .my-pickups__filters .filter-control {
+      flex: 1 1 100%;
+      justify-content: space-between;
+      padding: .5rem;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+    
+    .my-pickups__pagination {
+      background: transparent;
+      border-top: none;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    
+    .my-pickups__cards {
+      gap: 0;
+    }
+  }
+  
   .page-btn { width:100%; justify-content:center; }
   .my-pickups__pagination-controls { width:100%; }
 }
@@ -217,6 +424,460 @@
 .pickup-details-btn:hover .bi {
   transform:translateX(2px);
 }
+// ============================================
+// Mobile Card View - Fresh Modern Style
+// ============================================
+
+.my-pickups__cards {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: transparent;
+  
+  @include mobile {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+}
+
+.pickup-card {
+  background: $white;
+  border-radius: 24px;
+  box-shadow:
+    0 4px 20px rgba(0, 180, 148, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+  position: relative;
+  
+  @include mobile {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+}
+
+.pickup-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00d4aa 0%, #00b894 50%, #00a884 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pickup-card:active {
+  transform: scale(0.97);
+  box-shadow:
+    0 2px 12px rgba(0, 180, 148, 0.12),
+    0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.pickup-card:active::before {
+  opacity: 1;
+}
+
+.pickup-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 1.25rem;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.03), rgba(0, 184, 148, 0.05));
+  border-bottom: 1px solid rgba(0, 180, 148, 0.08);
+}
+
+.pickup-card__order {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.pickup-card__order .pickup-card__label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: rgba(0, 168, 132, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.pickup-card__order .order-number {
+  font-size: 1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00b894 0%, #00a884 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.pickup-card__status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  border-radius: 14px;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.pickup-card__body {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.pickup-card__row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pickup-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.pickup-card__label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: rgba(0, 168, 132, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.pickup-card__label .bi {
+  font-size: 0.95rem;
+  color: #00b894;
+  opacity: 0.8;
+}
+
+.pickup-card__value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $gray-900;
+  word-break: break-word;
+  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.pickup-card__value--link {
+  color: #00b894;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+  font-weight: 700;
+}
+
+.pickup-card__value--link:active {
+  color: #00a884;
+  transform: scale(0.98);
+}
+
+.pickup-card__value--link .bi {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.pickup-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-top: 1px solid rgba(0, 180, 148, 0.08);
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: linear-gradient(180deg, transparent, rgba(0, 212, 170, 0.02));
+}
+
+.pickup-card__cost {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pickup-card__cost-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #00b894 0%, #00a884 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.pickup-card__action {
+  padding: 0.75rem 1.25rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #00d4aa 0%, #00b894 50%, #00a884 100%);
+  color: $white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: none;
+  box-shadow:
+    0 4px 12px rgba(0, 180, 148, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.pickup-card__action:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 2px 8px rgba(0, 180, 148, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pickup-card__action .bi {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+// Mobile-specific adjustments - Fresh Modern Style
+@include mobile {
+  .my-pickups .card-heading {
+    gap: 0.65rem;
+  }
+
+  .my-pickups .card-heading__icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .my-pickups .fancy-card .card-header h5 {
+    font-size: 1.25rem;
+  }
+
+  .my-pickups .fancy-card .card-header small {
+    font-size: 0.85rem;
+  }
+
+  .my-pickups .summary-pill {
+    width: 5rem;
+    flex: 0 0 5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .my-pickups__filters {
+    padding: 1rem;
+    gap: 0.875rem;
+    background: transparent;
+    border-bottom: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .my-pickups__filters .filter-control {
+    flex: 1;
+    width: 100%;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow:
+      0 2px 10px rgba(0, 180, 148, 0.06),
+      0 1px 4px rgba(0, 0, 0, 0.04);
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .my-pickups__filters .filter-control .filter-label {
+    font-size: 0.625rem;
+    margin-bottom: 0;
+    color: rgba(0, 168, 132, 0.8);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .my-pickups__filters .filter-control .form-select {
+    min-width: 0;
+    flex: 1;
+    border-radius: 10px;
+    border: 1.5px solid rgba(0, 180, 148, 0.15);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.75rem;
+    box-shadow: none;
+    font-weight: 600;
+    color: $gray-900;
+    transition: all 0.3s ease;
+  }
+
+  .my-pickups__filters .filter-control .form-select:focus {
+    border-color: #00b894;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.12);
+    outline: none;
+  }
+
+  .my-pickups__pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    background: transparent;
+    border-radius: 0;
+    padding: 1.25rem 1rem 1.5rem;
+    border-top: none;
+  }
+
+  .my-pickups__pagination-info {
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(0, 168, 132, 0.7);
+    font-weight: 600;
+  }
+
+  .my-pickups__pagination-controls {
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 180, 148, 0.15);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    box-shadow:
+      0 3px 10px rgba(0, 180, 148, 0.06),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    min-width: 44px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #00b894;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .page-btn:active {
+    transform: scale(0.94);
+    box-shadow: 0 2px 8px rgba(0, 180, 148, 0.1);
+  }
+
+  .page-btn.active {
+    background: linear-gradient(135deg, #00d4aa 0%, #00b894 50%, #00a884 100%);
+    border: none;
+    box-shadow:
+      0 6px 16px rgba(0, 180, 148, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    color: $white;
+  }
+
+  .pickup-card__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .pickup-card__action {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .empty-state {
+    padding: 3rem 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0.5rem;
+    border-radius: 20px;
+    box-shadow:
+      0 4px 16px rgba(0, 180, 148, 0.08),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .empty-visual {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: linear-gradient(135deg,
+      rgba(0, 212, 170, 0.15),
+      rgba(0, 184, 148, 0.2)
+    );
+    box-shadow:
+      0 6px 16px rgba(0, 180, 148, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .my-pickups__loading {
+    padding: 3rem 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0.5rem;
+    border-radius: 20px;
+    box-shadow:
+      0 4px 16px rgba(0, 180, 148, 0.08),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .my-pickups__loading .spinner-border {
+    color: #00b894;
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.2rem;
+  }
+
+  .option-chip {
+    border-radius: 12px;
+    padding: 0.4rem 0.875rem;
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.08), rgba(0, 184, 148, 0.12));
+    box-shadow: 0 2px 6px rgba(0, 180, 148, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    border: 1px solid rgba(0, 180, 148, 0.15);
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #00a884;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .my-pickups__table-wrapper tbody tr,
@@ -224,11 +885,14 @@
   .page-btn,
   .pickup-details-btn,
   .pickup-details-btn .bi,
-  .empty-state {
+  .empty-state,
+  .pickup-card,
+  .pickup-card__action {
     transition-duration:.01ms !important;
     animation-duration:.01ms !important;
     animation-iteration-count:1 !important;
   }
 }
+
 
 

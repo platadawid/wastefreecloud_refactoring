@@ -150,6 +150,7 @@
   "topbar.openWallet": "Otwórz portfel",
   "topbar.goPortal": "Przejdź do portalu",
   "topbar.portalTitle": "Portal WasteFree",
+  "topbar.portalTitleMobile": "WasteFree",
   "topbar.openInbox" : "Otwórz powiadomienia"
   ,
   "inbox.title": "Powiadomienia",
@@ -655,5 +656,12 @@
   "bottomNav.groups": "Grupy",
   "bottomNav.pickups": "Wywozy",
   "bottomNav.wallet": "Portfel",
-  "bottomNav.profile": "Profil"
+  "bottomNav.profile": "Profil",
+  "bottomNav.groups.menu.title": "Grupy wywozowe",
+  "bottomNav.groups.menu.myGroups": "Moje grupy",
+  "bottomNav.groups.menu.joinCreate": "Stwórz lub dołącz",
+  "bottomNav.pickups.menu.title": "Wywozy odpadów",
+  "bottomNav.pickups.menu.order": "Zamów wywóz",
+  "bottomNav.pickups.menu.myPickups": "Moje wywozy",
+  "bottomNav.actionSheet.cancel": "Anuluj"
 }
